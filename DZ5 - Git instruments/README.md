@@ -13,6 +13,9 @@ tag: v0.12.23
 ```
 3. Сколько родителей у коммита b8d720? Напишите их хеши.
 ```
+9ea88f22fc6269854151c571162c5bcf958bee2b
+56cd7859e05c36c06b56d013b55a252d0bb7e158
+
 git log --graph b8d720|more
 
 *   commit b8d720f8340221f2146e4e4870bf2ee0bc48f2d5
@@ -58,6 +61,18 @@ Date:   Thu Apr 2 18:04:39 2020 -0700
 ```
 6. Найдите все коммиты в которых была изменена функция globalPluginDirs.
 ```
+git log -S 'func globalPluginDirs'
+commit 8364383c359a6b738a436d1b7745ccdce178df47
+
+git show 8364383c359a6b738a436d1b7745ccdce178df47
+Показывает, что функция создана в файле plugins.go_
+
+diff --git a/plugins.go b/plugins.go
+new file mode 100644
+index 000000000..9717724a0
+--- /dev/null
++++ b/plugins.go
+
 git log -L:globalPluginDirs:plugins.go --oneline
 
 78b122055
