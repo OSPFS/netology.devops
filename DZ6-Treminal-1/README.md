@@ -1,6 +1,6 @@
-* Домашняя работа к занятию "3.1. Работа в терминале, лекция 1"
+### Домашняя работа к занятию "3.1. Работа в терминале, лекция 1"
 
-5,7. Q: Какие ресурсы выделены по-умолчанию?
+5. Q: Какие ресурсы выделены по-умолчанию?
 
 ```
 root@vagrant:~# cat /proc/cpuinfo
@@ -89,7 +89,7 @@ vagrant@vagrant:~/test$ ls
 my_file1       my_file15999  my_file21999  my_file28     my_file34     my_file40     my_file460    my_file520    my_file5800   my_file6400   my_file7000   my_file76000  my_file82000  my_file88001  my_file94001
 my_file10      my_file16     my_file22     my_file280    my_file340    my_file400    my_file4600   my_file5200   my_file58000  my_file64000  my_file70000  my_file76001  my_file82001  my_file88002  my_file94002
 ```
-Q:  А получилось ли создать 300000?
+Q: получилось ли создать 300000?
 ```
 vagrant@vagrant:~/test$ rm -rf *
 vagrant@vagrant:~/test$ touch my_file{1..300000}
