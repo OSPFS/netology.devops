@@ -39,7 +39,28 @@ sdc                    8:32   0  2.5G  0 disk
 root@vagrant:/#
 ```
 16. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
-
+```
+root@vagrant:/mnt/LV100# lsblk
+NAME                 MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+sda                    8:0    0   64G  0 disk
+├─sda1                 8:1    0  512M  0 part  /boot/efi
+├─sda2                 8:2    0    1K  0 part
+└─sda5                 8:5    0 63.5G  0 part
+  ├─vgvagrant-root   253:0    0 62.6G  0 lvm   /
+  └─vgvagrant-swap_1 253:1    0  980M  0 lvm   [SWAP]
+sdb                    8:16   0  2.5G  0 disk
+├─sdb1                 8:17   0    2G  0 part
+│ └─md0                9:0    0    2G  0 raid1
+│   └─VG00-LV--100   253:2    0  100M  0 lvm   /mnt/LV100
+└─sdb2                 8:18   0  511M  0 part
+  └─md1                9:1    0 1018M  0 raid0
+sdc                    8:32   0  2.5G  0 disk
+├─sdc1                 8:33   0    2G  0 part
+│ └─md0                9:0    0    2G  0 raid1
+│   └─VG00-LV--100   253:2    0  100M  0 lvm   /mnt/LV100
+└─sdc2                 8:34   0  511M  0 part
+  └─md1                9:1    0 1018M  0 raid0
+```
 17. Сделайте --fail на устройство в вашем RAID1 md.
 
 18. Подтвердите выводом dmesg, что RAID1 работает в деградированном состоянии.
