@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: yes
+
+- name: Init
+  import_playbook: init.yml
+
+- hosts: balancers
+  become: yes
+
+- name: Configure ipvs-server
+  import_playbook: ipvs.yml 
+
+- hosts: web
+  become: yes
+
+- name: Configure Web-servers
+  import_playbook: web.yml
+

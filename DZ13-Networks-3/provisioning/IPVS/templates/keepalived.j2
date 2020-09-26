@@ -1,0 +1,46 @@
+! Configuration File for keepalived
+
+vrrp_instance VI_1 {
+    state {{ vrrp_state1 }}
+    interface eth1
+    virtual_router_id 55
+    priority {{ vrrp_prio1 }} #used in election, 101 for master & 100 for backup
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass P0S@word2
+    }
+    virtual_ipaddress {
+        10.10.1.10/24
+    }
+}
+
+vrrp_instance VI_2 {
+    state {{ vrrp_state2 }}
+    interface eth1
+    virtual_router_id 56
+    priority {{ vrrp_prio2 }} #used in election, 101 for master & 100 for backup
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass P0S@word2
+    }
+    virtual_ipaddress {
+        10.10.1.20/24
+    }
+}
+
+vrrp_instance VI_3 {
+    state {{ vrrp_state3 }}
+    interface eth1
+    virtual_router_id 57
+    priority {{ vrrp_prio3 }} #used in election, 101 for master & 100 for backup
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass P0S@word2
+    }
+    virtual_ipaddress {
+        10.10.1.30/24
+    }
+}

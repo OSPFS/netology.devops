@@ -1,0 +1,22 @@
+---
+
+- hosts: web
+  become: yes
+  tasks:
+  
+  - name: Add ip to loobback
+    shell: |
+      ip addr add 10.10.1.10/32 dev lo
+      ip addr add 10.10.1.20/32 dev lo
+      ip addr add 10.10.1.30/32 dev lo
+
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: present
+
+  - name: Satrt nginx
+    service:
+      name: nginx
+      enabled: yes
+      state: started

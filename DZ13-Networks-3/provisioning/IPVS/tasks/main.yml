@@ -1,0 +1,18 @@
+---
+# tasks file for IPVS
+
+- name: Install ipvsadm & keepalived
+  apt:
+    name:
+      - ipvsadm
+      - keepalived
+    state: present
+
+- name: Configure keepalived for routers
+  template: src=keepalived.j2 dest=/etc/keepalived/keepalived.conf mode=0666 owner=root
+
+- name: Enable VRRP
+  service:
+    name: keepalived
+    enabled: yes
+    state: started

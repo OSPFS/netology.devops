@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  
+  - name: Apt update
+    apt: 
+      cache_valid_time: 168800
+      update_cache: yes

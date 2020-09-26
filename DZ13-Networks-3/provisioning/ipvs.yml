@@ -1,0 +1,54 @@
+---
+
+- hosts: balancers
+  become: yes
+  roles:
+    - IPVS
+
+- hosts: b1
+  become: yes
+  tasks:
+  
+  - name: Setup IPVS
+    shell: |
+      ipvsadm -A -t 10.10.1.10:80 -s rr
+      ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.11:80 -g -w 1
+      ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.12:80 -g -w 1  
+      ipvsadm -A -t 10.10.1.20:80 -s rr
+      ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.11:80 -g -w 1
+      ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.12:80 -g -w 1
+      ipvsadm -A -t 10.10.1.30:80 -s rr
+      ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.11:80 -g -w 1
+      ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.12:80 -g -w 1
+
+- hosts: b2
+  become: yes
+  tasks:
+
+    - name: Setup IPVS
+      shell: |
+        ipvsadm -A -t 10.10.1.10:80 -s rr
+        ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.12:80 -g -w 1
+        ipvsadm -A -t 10.10.1.20:80 -s rr
+        ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.12:80 -g -w 1
+        ipvsadm -A -t 10.10.1.30:80 -s rr
+        ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.12:80 -g -w 1
+
+- hosts: b3
+  become: yes
+  tasks:
+  
+  - name: Setup IPVS
+    shell: |
+        ipvsadm -A -t 10.10.1.10:80 -s rr
+        ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.10:80 -r 10.10.1.12:80 -g -w 1
+        ipvsadm -A -t 10.10.1.20:80 -s rr
+        ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.20:80 -r 10.10.1.12:80 -g -w 1
+        ipvsadm -A -t 10.10.1.30:80 -s rr
+        ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.11:80 -g -w 1
+        ipvsadm -a -t 10.10.1.30:80 -r 10.10.1.12:80 -g -w 1
