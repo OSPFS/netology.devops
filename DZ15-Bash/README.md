@@ -46,14 +46,14 @@ done
 echo -n > access.log
 webs=(nic.ru yandex.ru mail.ru)
 count=0
-set -x
+
 while (($count<5))
 do
   for i in ${webs[@]}
   do
     curl -m 2 -s -o /dev/null http://$i     
       if (($?==0)); then
-         echo "$(date) $i Ok." >> access.log
+         echo "$(date) $i Ok." | tee -a access.log
       fi
   done
   let "count+=1"
@@ -72,7 +72,7 @@ do
   do
     curl -m 2 -s -o /dev/null http://$i     
       if (($?!=0)); then
-         echo "$(date) $i is down" >> access.log
+         echo "$(date) $i is down" | tee access.log
          exit
       fi
   done
@@ -82,10 +82,12 @@ done
 5. Мы хотим, чтобы у нас были красивые сообщения для коммитов в репозиторий. Для этого нужно написать локальный хук для git, который будет проверять, что сообщение в коммите содержит код текущего задания в квадратных скобках и количество символов в сообщении не превышает 30. Пример сообщения: [04-script-01-bash] сломал хук
 ```
 cat commit-msg
+
 #!/bin/sh
 
 msg=$(cat $1|wc -m)
 msg_code=$(cat $1 | grep -E '\[*[a-zA-Z0-9-]*\]'|wc -m)
+
 if (($msg>30)) || (($msg_code==0)); then
  echo 'Error "Wrong message!"' ; exit 2
 fi
