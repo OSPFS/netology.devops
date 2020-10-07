@@ -2,6 +2,8 @@
 
 import socket
 import time
+import json
+
 
 HOSTS = {'google.com': socket.gethostbyname('google.com'),
          'drive.google.com': socket.gethostbyname('drive.google.com'),
