@@ -62,7 +62,6 @@ while True:
     time.sleep(5)
 ```
 ```
-
 YAML:
 
 #!/usr/bin/env python3
