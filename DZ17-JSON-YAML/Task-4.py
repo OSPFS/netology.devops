@@ -5,9 +5,12 @@ import time
 import json
 
 
-HOSTS = {'google.com': socket.gethostbyname('google.com'),
-         'drive.google.com': socket.gethostbyname('drive.google.com'),
-         'mail.google.com': socket.gethostbyname('mail.google.com')}
+# HOSTS = {'google.com': socket.gethostbyname('google.com'),
+#          'drive.google.com': socket.gethostbyname('drive.google.com'),
+#          'mail.google.com': socket.gethostbyname('mail.google.com')}
+
+with open('hosts.json') as JFILE:
+    HOSTS = json.load(JFILE)   
 
 while True:    
     for SRV in HOSTS.keys():
@@ -18,5 +21,7 @@ while True:
         else:
             print(f'[ERROR] {SRV} IP mismatch: {LAST_IP} - {CURRENT_IP}')
             HOSTS[SRV] = CURRENT_IP
-    print()
+            with open('hosts.json', 'w') as JFILE:
+                json.dump(HOSTS, JFILE, indent=2)           
+    print()    
     time.sleep(5)
