@@ -1,0 +1,11 @@
+FROM ubuntu:18.04
+
+ADD https://pkg.jenkins.io/debian-stable/jenkins.io.key /tmp
+RUN apt-get update && apt-get install gnupg2 ca-certificates openjdk-8-jre -y
+RUN apt-key add /tmp/jenkins.io.key
+RUN echo "deb https://pkg.jenkins.io/debian-stable binary/" > /etc/apt/sources.list
+WORKDIR /tmp
+RUN apt-get update && apt-get download jenkins
+RUN dpkg -i --force-all jenkins_2.249.3_all.deb
+EXPOSE 8080 50000
+CMD ["/usr/bin/java","-jar","/usr/share/jenkins/jenkins.war"]

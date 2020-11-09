@@ -1,0 +1,6 @@
+FROM centos:7
+
+ADD https://pkg.jenkins.io/redhat-stable/jenkins.repo /etc/yum.repos.d/jenkins.repo
+RUN rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key && yum install java-11-openjdk jenkins -y
+EXPOSE 8080 50000
+CMD ["/usr/bin/java","-jar","/usr/lib/jenkins/jenkins.war"]
