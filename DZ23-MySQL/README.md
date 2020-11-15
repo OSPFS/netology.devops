@@ -54,7 +54,8 @@ mysql> select * from orders where price > 300;
 * Задача 2
 ```
 mysql> CREATE USER test IDENTIFIED WITH mysql_native_password BY 'test-pass'
-    -> WITH MAX_CONNECTIONS_PER_HOUR 100 PASSWORD EXPIRE INTERVAL 180 DAY FAILED_LOGIN_ATTEMPTS 3 ATTRIBUTE '{"fname": "James", "lname": "Pretty"}';
+    -> WITH MAX_CONNECTIONS_PER_HOUR 100 PASSWORD EXPIRE INTERVAL 180 DAY 
+    -> FAILED_LOGIN_ATTEMPTS 3 ATTRIBUTE '{"fname": "James", "lname": "Pretty"}';
 Query OK, 0 rows affected (0.02 sec)
 
 mysql> grant select on test_db.* to test;
@@ -109,8 +110,9 @@ mysql> SHOW TABLE STATUS WHERE Name = 'orders';
 | orders | InnoDB |      10 | Dynamic    |    5 |           3276 |       16384 |               0 |            0 |         0 |              6 | 2020-11-15 19:19:59 | 2020-11-15 19:19:59 | NULL       | utf8mb4_0900_ai_ci |     NULL |                |         |
 +--------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
 1 row in set (0.01 sec)
+
+Engine = InnoDB
 ```
-Engine - InnoDB
 ```
 mysql> ALTER TABLE orders ENGINE = MyISAM;
 Query OK, 5 rows affected (0.02 sec)
@@ -143,14 +145,15 @@ mysql> SHOW PROFILES;
 +----------+------------+-----------------------------------------+
 8 rows in set, 1 warning (0.00 sec)
 ```
-Запрос _select * from orders_ на InnoDB выпполнялся за 0.00068725 секунд, при изменении на MyISAM время выплнения стало 0.00047100 секунд
+Запрос _select * from orders_ на InnoDB выпполнялся за 0.00068725 секунд, 
+при изменении на MyISAM время выплнения уменьшилось и стало 0.00047100 секунд
 
 * Задача 4
 ```
 /etc/mysql/conf.d/mysql.cnf:
 
 [mysql]
-innodb_buffer_pool_size = 614M
+innodb_buffer_pool_size = 614M # 30% from 2GB
 innodb_log_file_size    = 100M
 innodb_log_buffer_size  = 1M
 innodb-file-per-table   = ON 
