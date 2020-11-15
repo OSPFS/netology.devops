@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:8
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456xx
+      PGDATA: /srv/db      
+    volumes:
+      - my_db:/var/lib/mysql
+      - ./test_dump.sql:/tmp/test_dump.sql
+
+volumes:
+  my_db:
