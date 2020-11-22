@@ -9,8 +9,9 @@
 выхода из psql \q
 ```
 * Задача 2
+```
 select max(avg_width) from pg_stats where tablename='orders';
-
+```
 * Задача 3
 ```
 1. Делаем create table для новой orders_temp, которая по структуре является точно копией таблицы order + добавляем  в этот оператор partition by блок
