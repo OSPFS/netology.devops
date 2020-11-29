@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  elk:
+    image: kundulun/elk
+    user: elastic
+    restart: unless-stopped
+    ports:
+      - 9200:9200
+    volumes:
+      - ./elasticsearch.yml:/srv/elasticsearch/config/elasticsearch.yml
+      - ./snapshots/:/srv/elasticsearch/snapshots/
+volumes:
+  elk_vol:
+
