@@ -1,0 +1,9 @@
+[el]
+centos			ansible_connection=docker
+
+[deb]
+ubuntu			ansible_connection=docker
+
+[local]
+::1		ansible_connection=local
+
