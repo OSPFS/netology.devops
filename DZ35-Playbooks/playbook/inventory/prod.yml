@@ -1,0 +1,7 @@
+---
+  elasticsearch:
+    hosts:
+      elktest:
+        ansible_host: 10.0.1.125        
+        ansible_user: root
+        
